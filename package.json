@@ -2,9 +2,8 @@
   "name": "backend-advanced",
   "version": "1.0.0",
   "description": "backend-special",
-  "type":"module",
+  "type": "module",
   "main": "index.js",
-  
   "scripts": {
     "dev": "nodemon src/index.js"
   },
@@ -16,6 +15,7 @@
   "author": "Moni Chaurasiya",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3"
   }
 }
