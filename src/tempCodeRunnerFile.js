@@ -1,3 +1,0 @@
-dotenv.config({
-//   path: "./env",
-// });
