@@ -60,7 +60,8 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   // Hash the password and replace the plain text password
-  this.password = await bcrypt.hash(this.password, 10);
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 
   next();
 });
@@ -76,6 +77,29 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 };
 
 userSchema.methods.generateAccessToken = function () {
+  /*
+    A JWT consists of three parts:
+
+Header: Contains metadata about the token, such as the signing algorithm.
+
+Payload: Contains the actual data or "claims" (e.g., user information).
+
+Signature: Verifies the authenticity of the token and ensures that the payload has not been tampered with. 
+
+*/
+
+  //The jwt.sign() function is used to create a new JWT token by combining a payload (data) with a secret key. It then digitally signs the token to ensure its authenticity.
+
+  //Payload: The first argument is an object that contains the data you want to include in the token (often user-related information like userId).
+
+  //Secret Key: The second argument is the secret key or private key used to sign the token.
+
+  //Options (Optional): The third argument is an optional configuration object where you can set things like:
+
+  // expiresIn: Determines how long the token is valid for. Example values:
+  // '1h' for 1 hour
+  // '2d' for 2 days
+  // algorithm: Specifies the signing algorithm (e.g., HS256, RS256).
   return jwt.sign(
     {
       _id: this._id,
